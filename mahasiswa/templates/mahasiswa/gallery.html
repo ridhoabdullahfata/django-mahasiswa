@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Data Mahasiswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4FC3F7;
+            --secondary-blue: #29B6F6;
+            --dark-blue: #0288D1;
+            --light-blue: #81D4FA;
+            --bg-dark: #0A1929;
+            --bg-card: #132F4C;
+            --bg-hover: #1A3A52;
+            --text-primary: #E3F2FD;
+            --text-secondary: #B3E5FC;
+            --border-color: #1E4976;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0A1929 0%, #1A237E 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        .navbar-custom {
+            background: rgba(19, 47, 76, 0.95);
+            border-bottom: 2px solid var(--primary-blue);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary-blue) !important;
+        }
+        
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .gallery-item {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 32px rgba(79, 195, 247, 0.4);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            padding: 1rem;
+            background: var(--bg-hover);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge-event {
+            background: linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%);
+            color: white;
+        }
+        
+        .badge-campus {
+            background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+            color: white;
+        }
+        
+        .badge-academic {
+            background: linear-gradient(135deg, #FFA726 0%, #FB8C00 100%);
+            color: white;
+        }
+        
+        .badge-student {
+            background: linear-gradient(135deg, #AB47BC 0%, #8E24AA 100%);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-outline-secondary {
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="{% url 'mahasiswa:home' %}">
+                <span class="fs-3 me-2">🎓</span>
+                <span>Data Mahasiswa</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mahasiswa:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mahasiswa:about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'mahasiswa:gallery' %}">Gallery</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex gap-2">
+                    <a href="{% url 'mahasiswa:login' %}" class="btn btn-outline-secondary btn-sm">
+                        Masuk
+                    </a>
+                    <a href="{% url 'mahasiswa:register' %}" class="btn btn-primary btn-sm">
+                        Daftar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-blue);">Gallery</h1>
+            <p class="lead" style="color: var(--text-secondary);">
+                Dokumentasi Kegiatan Kampus dan Aktivitas Mahasiswa
+            </p>
+        </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="container pb-5">
+        <div class="row g-4">
+            
+            <!-- Gallery Item 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80" 
+                         alt="Kegiatan Akademik" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-academic">Akademik</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Kegiatan Belajar Mengajar</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Suasana pembelajaran interaktif di kelas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80" 
+                         alt="Kampus" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-campus">Kampus</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Gedung Kampus</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Fasilitas modern untuk mendukung pembelajaran</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" 
+                         alt="Tim Project" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-student">Mahasiswa</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Kerja Kelompok</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Kolaborasi mahasiswa dalam project team</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80" 
+                         alt="Perpustakaan" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-campus">Kampus</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Perpustakaan Digital</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Ruang belajar yang nyaman dan modern</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80" 
+                         alt="Wisuda" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-event">Event</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Wisuda</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Perayaan kelulusan mahasiswa</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 6 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" 
+                         alt="Lab Komputer" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-academic">Akademik</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Lab Komputer</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Praktikum dengan perangkat terkini</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 7 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" 
+                         alt="Seminar" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-event">Event</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Seminar Nasional</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Berbagi ilmu dengan pembicara terbaik</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 8 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=600&q=80" 
+                         alt="Olahraga" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-student">Mahasiswa</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Kegiatan Olahraga</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Menjaga kesehatan jasmani mahasiswa</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Item 9 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=600&q=80" 
+                         alt="Organisasi" 
+                         class="gallery-img">
+                    <div class="gallery-caption">
+                        <span class="category-badge badge-student">Mahasiswa</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--text-primary);">Kegiatan Organisasi</h5>
+                        <p class="small mb-0" style="color: var(--text-secondary);">Mengembangkan soft skill melalui organisasi</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center mt-5 pt-4">
+            <h3 class="h4 fw-bold mb-3" style="color: var(--primary-blue);">Ingin Bergabung?</h3>
+            <p class="mb-4" style="color: var(--text-secondary);">Jadilah bagian dari komunitas kami dan ciptakan kenangan indah</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="{% url 'mahasiswa:register' %}" class="btn btn-primary btn-lg">Daftar Sekarang</a>
+                <a href="{% url 'mahasiswa:home' %}" class="btn btn-outline-secondary btn-lg">Kembali ke Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4" style="border-top: 2px solid var(--border-color);">
+        <div class="container text-center">
+            <p class="mb-0" style="color: var(--text-secondary);">
+                &copy; 2025 Data Mahasiswa. Dibuat dengan Django & Bootstrap
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

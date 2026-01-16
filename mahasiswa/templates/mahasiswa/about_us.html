@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Data Mahasiswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4FC3F7;
+            --secondary-blue: #29B6F6;
+            --dark-blue: #0288D1;
+            --light-blue: #81D4FA;
+            --bg-dark: #0A1929;
+            --bg-card: #132F4C;
+            --bg-hover: #1A3A52;
+            --text-primary: #E3F2FD;
+            --text-secondary: #B3E5FC;
+            --border-color: #1E4976;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0A1929 0%, #1A237E 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        .navbar-custom {
+            background: rgba(19, 47, 76, 0.95);
+            border-bottom: 2px solid var(--primary-blue);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--text-primary) !important;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary-blue) !important;
+        }
+        
+        .hero-about {
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.2) 0%, rgba(171, 71, 188, 0.2) 100%);
+            border: 2px solid var(--primary-blue);
+            border-radius: 1.5rem;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .section-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .team-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .team-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-blue);
+            margin: 0 auto 1rem;
+            background: var(--bg-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-outline-secondary {
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="{% url 'mahasiswa:home' %}">
+                <span class="fs-3 me-2">🎓</span>
+                <span>Data Mahasiswa</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mahasiswa:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'mahasiswa:about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mahasiswa:gallery' %}">Gallery</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex gap-2">
+                    <a href="{% url 'mahasiswa:login' %}" class="btn btn-outline-secondary btn-sm">
+                        Masuk
+                    </a>
+                    <a href="{% url 'mahasiswa:register' %}" class="btn btn-primary btn-sm">
+                        Daftar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        
+        <!-- Hero Section -->
+        <div class="hero-about">
+            <h1 class="display-4 fw-bold mb-3" style="color: var(--primary-blue);">Tentang Kami</h1>
+            <p class="lead" style="color: var(--text-secondary);">
+                Sistem Manajemen Data Mahasiswa Modern untuk Pengelolaan Informasi Akademik yang Efisien
+            </p>
+        </div>
+
+        <!-- Vision & Mission -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="section-card h-100">
+                    <div class="text-center mb-3">
+                        <div class="fs-1">🎯</div>
+                    </div>
+                    <h3 class="h4 fw-bold text-center mb-3" style="color: var(--primary-blue);">Visi Kami</h3>
+                    <p style="color: var(--text-secondary);">
+                        Menjadi platform terdepan dalam manajemen data mahasiswa yang mengintegrasikan teknologi modern 
+                        untuk meningkatkan efisiensi administrasi akademik dan memberikan pengalaman terbaik bagi institusi pendidikan.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="section-card h-100">
+                    <div class="text-center mb-3">
+                        <div class="fs-1">🚀</div>
+                    </div>
+                    <h3 class="h4 fw-bold text-center mb-3" style="color: var(--primary-blue);">Misi Kami</h3>
+                    <ul style="color: var(--text-secondary);">
+                        <li class="mb-2">Menyediakan sistem yang mudah digunakan dan efisien</li>
+                        <li class="mb-2">Menjaga keamanan dan privasi data mahasiswa</li>
+                        <li class="mb-2">Terus berinovasi dengan teknologi terkini</li>
+                        <li>Memberikan dukungan teknis yang responsif</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="section-card mb-5">
+            <h3 class="h4 fw-bold text-center mb-4" style="color: var(--primary-blue);">Pencapaian Kami</h3>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Mahasiswa Terdaftar</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Program Studi</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Institusi Partner</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime System</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="section-card mb-5">
+            <h3 class="h4 fw-bold text-center mb-4" style="color: var(--primary-blue);">Tim Kami</h3>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <div class="team-avatar">👨‍💻</div>
+                        <h5 class="fw-bold" style="color: var(--text-primary);">Eka Nurviantoro</h5>
+                        <p class="small" style="color: var(--primary-blue);">Lead Developer</p>
+                        <p class="small" style="color: var(--text-secondary);">Spesialis dalam pengembangan sistem web dan database management</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <div class="team-avatar">👨‍🎨</div>
+                        <h5 class="fw-bold" style="color: var(--text-primary);">UI/UX Designer</h5>
+                        <p class="small" style="color: var(--primary-blue);">Creative Director</p>
+                        <p class="small" style="color: var(--text-secondary);">Menciptakan pengalaman pengguna yang intuitif dan menarik</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <div class="team-avatar">👨‍💼</div>
+                        <h5 class="fw-bold" style="color: var(--text-primary);">Project Manager</h5>
+                        <p class="small" style="color: var(--primary-blue);">Product Lead</p>
+                        <p class="small" style="color: var(--text-secondary);">Memastikan pengiriman produk berkualitas tinggi tepat waktu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="section-card">
+            <h3 class="h4 fw-bold text-center mb-4" style="color: var(--primary-blue);">Mengapa Memilih Kami?</h3>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="d-flex gap-3">
+                        <div class="fs-2">✅</div>
+                        <div>
+                            <h6 class="fw-bold" style="color: var(--text-primary);">Mudah Digunakan</h6>
+                            <p class="small mb-0" style="color: var(--text-secondary);">Interface intuitif yang mudah dipahami oleh semua kalangan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="d-flex gap-3">
+                        <div class="fs-2">🔐</div>
+                        <div>
+                            <h6 class="fw-bold" style="color: var(--text-primary);">Keamanan Terjamin</h6>
+                            <p class="small mb-0" style="color: var(--text-secondary);">Enkripsi data dan sistem autentikasi yang robust</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="d-flex gap-3">
+                        <div class="fs-2">⚡</div>
+                        <div>
+                            <h6 class="fw-bold" style="color: var(--text-primary);">Performa Cepat</h6>
+                            <p class="small mb-0" style="color: var(--text-secondary);">Optimasi maksimal untuk loading time yang minimal</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="d-flex gap-3">
+                        <div class="fs-2">📱</div>
+                        <div>
+                            <h6 class="fw-bold" style="color: var(--text-primary);">Responsive Design</h6>
+                            <p class="small mb-0" style="color: var(--text-secondary);">Akses dari desktop, tablet, atau smartphone dengan lancar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center mt-5">
+            <h3 class="h4 fw-bold mb-3" style="color: var(--primary-blue);">Siap Bergabung?</h3>
+            <p class="mb-4" style="color: var(--text-secondary);">Mulai kelola data mahasiswa Anda dengan lebih efisien hari ini</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="{% url 'mahasiswa:register' %}" class="btn btn-primary btn-lg">Daftar Sekarang</a>
+                <a href="{% url 'mahasiswa:home' %}" class="btn btn-outline-secondary btn-lg">Kembali ke Home</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4" style="border-top: 2px solid var(--border-color);">
+        <div class="container text-center">
+            <p class="mb-0" style="color: var(--text-secondary);">
+                &copy; 2025 Data Mahasiswa. Dibuat dengan Django & Bootstrap
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
